@@ -3,7 +3,7 @@ tools = [
         "type": "function",
         "function": {
             "name": "write_file",
-            "description": "Write content to a file",
+            "description": "Write content to a file. Creates files and folders if they do not exist",
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -18,7 +18,7 @@ tools = [
         "type": "function",
         "function": {
             "name": "exec_command",
-            "description": "Execute a shell command",
+            "description": "Execute a shell command, but if a user asks to write something into file do not use this tool for that",
             "parameters": {
                 "type": "object",
                 "properties": {
