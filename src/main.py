@@ -24,6 +24,24 @@ def write_file(path: str, content: str, project_root: Path):
         f.write(content)
     return f"File written to {file_path}"
 
+def read_file(path: str, project_root: Path) -> str:
+    """
+    Tool for the LLM to read content from a file.
+    Ensures files are only read inside project_root.
+    """
+    file_path = Path(project_root) / path
+    file_path = file_path.resolve()
+
+    if not str(file_path).startswith(str(project_root.resolve())):
+        raise ValueError(f"Attempted to read outside of project root: {file_path}")
+
+    if not file_path.is_file():
+        raise FileNotFoundError(f"The file {file_path} does not exist.")
+
+    with open(file_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    return content
+
 def get_folder_structure(path: str) -> str:
     """
     Recursively lists the folder structure starting from `path`.
@@ -134,6 +152,5 @@ PROJECT STRUCTURE:
             messages.append(msg)
             if "DONE" in msg.content:
                 break
-
 if __name__ == "__main__":
     main()
