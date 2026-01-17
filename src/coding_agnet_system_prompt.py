@@ -3,6 +3,7 @@ def get_system_prompt(project_root: str) -> str:
 
 You have access to the following tools:
 - write_file(path, content)
+- read_file(path)
 - exec_command(command)
 
 Rules:
