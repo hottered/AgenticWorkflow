@@ -118,13 +118,16 @@ PROJECT STRUCTURE:
             tool_calls: List of tool calls to execute
         """
         for call in tool_calls:
+            
             name = call.function.name
             args = json.loads(call.function.arguments)
+            tool_call_id = call.id
+        
             result = self._execute_tool(name, args)
 
             self.messages.append({
                 "role": "tool",
-                "tool_call_id": call.id,
+                "tool_call_id": tool_call_id,
                 "content": str(result)
             })
 
@@ -140,12 +143,13 @@ PROJECT STRUCTURE:
         """
         return content and "DONE" in content
 
-    def run(self, task: str) -> str:
+    def run(self, task: str, stream: bool = True) -> str: 
         """
         Run the coding agent with the given task.
 
         Args:
             task: Task description
+            stream: Whether to stream the response
 
         Returns:
             Final agent response with task completion summary
@@ -153,6 +157,7 @@ PROJECT STRUCTURE:
         try:
             self._initialize_messages(task)
             self.task_completion = None
+            self.set_stream_mode(stream)
             max_iterations = 20
             iteration = 0
 

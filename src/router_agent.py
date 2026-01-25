@@ -27,9 +27,8 @@ class AgentRouter:
             Agent type: 'conversational' or 'coding'
         """
         coding_keywords = [
-            "napravi", "kreiraj", "izmeni", "dodaj", "obriši",
-            "refaktorisi", "debug", "popravi", "implementiraj",
-            "kod", "fajl", "projekat", "funkciju", "klasu"
+            "create", "edit", "fix", "build", "implement", "refactor",
+            "debug", "code", "script", "function", "class", "module",
         ]
 
         user_input_lower = user_input.lower()

@@ -10,18 +10,18 @@ def main() -> None:
             project_root = get_valid_project_root()
         except Exception:
             project_root = None
-            print("WARNING: Coding agent not awailable (project root not found).")
+            print("WARNING: Coding agent not available (project root not found).")
 
         router = AgentRouter(project_root)
 
-        print("Multi-Agent Sistem runing!")
+        print("Multi-Agent System running!")
         print("Press 'exit' or 'quit' to leave the session.\n")
 
         while True:
             user_input = input("Ti: ").strip()
 
             if user_input.lower() in ["exit", "quit", "izlaz"]:
-                print("Goodbyte... :(")
+                print("Goodbye... :(")
                 break
 
             if not user_input:
@@ -31,9 +31,9 @@ def main() -> None:
             print(f"\nAgent: {response}\n")
 
     except KeyboardInterrupt:
-        print("\n\nOperacija prekinuta.")
+        print("\n\nOperation interrupted.")
     except Exception as e:
-        print(f"Greška: {e}")
+        print(f"Error: {e}")
         raise
     
 if __name__ == "__main__":
