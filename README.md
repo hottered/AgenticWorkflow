@@ -285,29 +285,95 @@ Definišu se osnovna pravila ponašanja agenta:
 ## Pokretanje sistema
  
 ### Preduslovi
-
-Za Linux: 
+ 
+#### Python
+ 
+Projekat zahteva **Python 3.9+**.
+ 
+Proveri instalaciju:
 ```bash
+python --version
+# ili
+python3 --version
+```
+ 
+Ako Python nije instaliran:
+- **Windows** — preuzmi sa [python.org/downloads](https://www.python.org/downloads/) i tokom instalacije obavezno čekiraj **"Add Python to PATH"**
+- **Linux (Debian/Ubuntu)** — `sudo apt update && sudo apt install python3 python3-pip python3-venv`
+- **Linux (Fedora/RHEL)** — `sudo dnf install python3 python3-pip`
+- **macOS** — `brew install python3` (zahteva [Homebrew](https://brew.sh/))
+ 
+---
+ 
+#### Git (opciono, za kloniranje repozitorijuma)
+ 
+Proveri instalaciju:
+```bash
+git --version
+```
+ 
+Ako Git nije instaliran:
+- **Windows** — preuzmi sa [git-scm.com](https://git-scm.com/downloads)
+- **Linux** — `sudo apt install git` / `sudo dnf install git`
+- **macOS** — `brew install git`
+ 
+---
+ 
+#### OpenAI API ključ
+ 
+Projekat koristi OpenAI API i zahteva validan API ključ.
+ 
+1. Napravi nalog na [platform.openai.com](https://platform.openai.com/)
+2. Idi na **API Keys** → **Create new secret key**
+3. Kopiraj ključ — prikazuje se samo jednom
+ 
+> ⚠️ Upotreba API-ja se naplaćuje po tokenima. Proveri [OpenAI pricing](https://openai.com/pricing) pre korišćenja.
+ 
+---
+ 
+#### Instalacija projekta
+ 
+**Linux / macOS:**
+```bash
+git clone <repo-url>
 cd AgenticWorkflow
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 export OPENAI_API_KEY="sk-..."
 ```
-Za Windows
-```bash
+ 
+**Windows (PowerShell):**
+```powershell
+git clone <repo-url>
 cd AgenticWorkflow
 python -m venv venv
-source venv\Scripts\Activate.ps1
+.\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-export OPENAI_API_KEY="sk-..."
+$env:OPENAI_API_KEY="sk-..."
 ```
  
-### Entry point
+> ⚠️ Na Windowsu, ako dobijete grešku `execution of scripts is disabled`, pokrenite sledeće u PowerShell-u kao administrator:
+> ```powershell
+> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+> ```
+ 
+---
+ 
+#### Verifikacija instalacije
+ 
+Nakon aktivacije virtualnog okruženja i instalacije zavisnosti, pokreni:
  
 ```bash
 python main.py
 ```
+ 
+Očekivan ispis:
+```
+Enter project root: 
+```
+ 
+Ako se pojavi greška vezana za pakete, proveri da li je venv aktivan — u terminalu treba da se vidi `(venv)` ispred prompta.
  
 Nakon pokretanja, sistem će tražiti unos putanje do project root-a:
  
