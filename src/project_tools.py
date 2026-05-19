@@ -34,8 +34,24 @@ class ProjectTools:
         with open(file_path, "r", encoding="utf-8") as f:
             return f.read()
     
+    @staticmethod
+    def confirm_command(command: str) -> bool:
+        """Ask the user to confirm before running a shell command."""
+        while True:
+            answer = input(f"\nAre you sure you want to run `{command}`? (y/n): ").strip().lower()
+            if answer == "y":
+                return True
+            elif answer == "n":
+                print("Command skipped.")
+                return False
+            else:
+                print("Please enter 'y' or 'n'.")
+    
     def exec_command(self, command: str) -> Dict[str, Any]:
         """Execute a shell command and return results."""
+        if not self.confirm_command(command):
+            return {"stdout": "", "stderr": "Command execution cancelled by user.", "returncode": -1}
+        
         result = subprocess.run(
             command,
             shell=True,

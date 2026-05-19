@@ -40,6 +40,7 @@ class ConversationalAgent(BaseAgent):
         Returns:
             Agent response
         """
+        self.set_stream_mode(False)  # Disable streaming for conversational agent
         self._initialize_messages(user_input)
         message = self._get_completion()
         return message.content
